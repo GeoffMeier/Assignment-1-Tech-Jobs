@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -9,11 +6,11 @@ import java.util.Scanner;
 public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
-
+   static HashMap<String, String> columnChoices = new HashMap<>();
     public static void main (String[] args) {
 
         // Initialize our field map with key/name pairs
-        HashMap<String, String> columnChoices = new HashMap<>();
+
         columnChoices.put("core competency", "Skill");
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
@@ -59,10 +56,15 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
+
                 String searchTerm = in.nextLine();
+
+
+
 
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
+
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -115,11 +117,25 @@ public class TechJobs {
         } while(!validChoice);
 
         return choiceKeys[choiceIdx];
+
     }
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+//        JobData jobData = new JobData();
 
-        System.out.println("printJobs is not implemented yet");
+
+        // Print list of skills, employers, etc
+        for (Map item : someJobs) {
+
+           System.out.println("*****");
+            item.forEach((key, value) -> {
+
+    System.out.println(String.format("%s: %s",key,value));
+            });
+            System.out.println("*****\n");
+        }
+
+
     }
 }

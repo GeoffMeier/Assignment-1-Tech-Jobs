@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by LaunchCode
@@ -78,9 +79,14 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
+           String newValue= aValue.toLowerCase();
 
-            if (aValue.contains(value)) {
+
+            if (newValue.contains(value.toLowerCase())) {
                 jobs.add(row);
+            }else{
+                System.out.println("No Results");
+                break;
             }
         }
 
@@ -97,9 +103,23 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
+        ArrayList<HashMap<String, String>> hashMaps = new ArrayList<>();
+        for (HashMap<String, String> job : allJobs) {
+        String jobs = job.values().toString();
+            if (jobs.toLowerCase().contains(value.toLowerCase())) {
+                hashMaps.add(job);
+            }else{
+                System.out.println("No Results");
+                break;
+            }
 
+
+
+
+        }
+        return hashMaps;
         // TODO - implement this method
-        return null;
+
     }
 
     /**
